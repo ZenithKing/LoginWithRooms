@@ -34,6 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setUserName(editTextUserName.getText().toString());
                 user.setPassword(editTextPassword.getText().toString());
 
+                Phones phones = new Phones();
+                phones.setCellPhone("3208378947");
+                phones.setHomePhone("7490322");
+                phones.setWorkPhone("01800010202010");
+
+                user.setPhones(phones);
+
                 new RegisterAsync().execute(user);
             }
         });

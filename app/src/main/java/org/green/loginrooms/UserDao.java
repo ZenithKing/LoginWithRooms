@@ -10,7 +10,9 @@ import android.arch.persistence.room.Query;
 @Dao
 public interface UserDao {
 
-    @Query("SELECT * FROM users WHERE user_name = :userName AND password = :password")
+    @Query("SELECT * FROM users WHERE " +
+            "user_name = :userName AND " +
+            "password  = :password")
     User login(String userName, String password);
 
     @Insert

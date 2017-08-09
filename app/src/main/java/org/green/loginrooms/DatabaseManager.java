@@ -13,7 +13,9 @@ public class DatabaseManager {
     private AppDatabase database;
 
     private DatabaseManager(Context context) {
-        database = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "globant-database").build();
+        database = Room.databaseBuilder(
+                context.getApplicationContext(),
+                AppDatabase.class, "globant-database").build();
     }
 
     public synchronized static void init(Context context) {
@@ -28,5 +30,7 @@ public class DatabaseManager {
 
     public AppDatabase getDatabase() {
         return database;
+
+
     }
 }
