@@ -40,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity {
                 phones.setWorkPhone("01800010202010");
 
                 user.setPhones(phones);
+                //user.setRoleId(1);
 
                 new RegisterAsync().execute(user);
             }

@@ -3,6 +3,7 @@ package org.green.loginrooms;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
@@ -23,6 +24,9 @@ public class User implements Serializable {
 
     @ColumnInfo(name = "password")
     private String password;
+
+    @ColumnInfo(name = "role_id")
+    public int roleId;
 
     @Embedded
     private Phones phones;
@@ -62,6 +66,19 @@ public class User implements Serializable {
         this.phones = phones;
     }
 
+    public int getRoleId() {
+        return roleId;
+    }
 
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
+    public boolean isProgrammer() {
+        return isProgrammer;
+    }
+
+    public void setProgrammer(boolean programmer) {
+        isProgrammer = programmer;
+    }
 }

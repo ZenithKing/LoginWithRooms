@@ -16,5 +16,5 @@ public interface UserDao {
     User login(String userName, String password);
 
     @Insert
-    void insertUser(User user);
+    Long insertUser(User user);
 }
