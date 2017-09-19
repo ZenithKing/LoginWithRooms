@@ -5,6 +5,7 @@ import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -12,12 +13,13 @@ import java.io.Serializable;
 /**
  * Created by wilsoncastiblanco on 8/8/17.
  */
-@Entity(tableName = "users")
+@Entity(tableName = "users", indices = {@Index(value = {"user_name"},
+        unique = true)})
 public class User implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")
-    private String id;
+    private int id;
 
     @ColumnInfo(name = "user_name")
     private String userName;
@@ -34,11 +36,38 @@ public class User implements Serializable {
     @Ignore
     private boolean isProgrammer;
 
-    public String getId() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    private int age;
+
+    private String email;
+
+
+    public void setIsOld(String isOld) {
+        this.isOld = isOld;
+    }
+
+    private String isOld;
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -78,6 +107,13 @@ public class User implements Serializable {
         return isProgrammer;
     }
 
+    public String isOld() {
+        return isOld;
+    }
+
+    public void setOld(String old) {
+        isOld = old;
+    }
     public void setProgrammer(boolean programmer) {
         isProgrammer = programmer;
     }

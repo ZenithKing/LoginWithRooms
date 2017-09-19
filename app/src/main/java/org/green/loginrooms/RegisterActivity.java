@@ -1,5 +1,6 @@
 package org.green.loginrooms;
 
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -30,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 User user = new User();
-                user.setId(editTextId.getText().toString());
                 user.setUserName(editTextUserName.getText().toString());
                 user.setPassword(editTextPassword.getText().toString());
 
@@ -47,19 +47,29 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public class RegisterAsync extends AsyncTask<User, Void, Void> {
+    public class RegisterAsync extends AsyncTask<User, Void, SQLiteConstraintException> {
 
         @Override
-        protected Void doInBackground(User... users) {
-            DatabaseManager.getInstance().getDatabase().userDao().insertUser(users[0]);
+        protected SQLiteConstraintException doInBackground(User... users) {
+            try{
+                DatabaseManager.getInstance().getDatabase().userDao().insertUser(users[0]);
+            }catch (SQLiteConstraintException exception){
+                return exception;
+            }
             return null;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
+        protected void onPostExecute(SQLiteConstraintException aVoid) {
             super.onPostExecute(aVoid);
-            Snackbar.make(buttonRegister, "User Registered!", Snackbar.LENGTH_SHORT).show();
-            RegisterActivity.this.finish();
+            if(aVoid != null){
+                Snackbar.make(buttonRegister, aVoid.getMessage(), Snackbar.LENGTH_SHORT).show();
+            } else {
+                Snackbar.make(buttonRegister, "User Registered!", Snackbar.LENGTH_SHORT).show();
+
+                RegisterActivity.this.finish();
+            }
+
         }
     }
 

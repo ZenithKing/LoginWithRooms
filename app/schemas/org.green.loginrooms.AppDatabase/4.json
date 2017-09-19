@@ -1,0 +1,110 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "944a51a6e8f15788ca6fda4df9790aa6",
+    "entities": [
+      {
+        "tableName": "users",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`user_id` TEXT, `user_name` TEXT, `password` TEXT, `role_id` INTEGER, `age` INTEGER, `email` TEXT, `isOld` TEXT, `cellPhone` TEXT, `homePhone` TEXT, `workPhone` TEXT, PRIMARY KEY(`user_id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "user_id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "userName",
+            "columnName": "user_name",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "roleId",
+            "columnName": "role_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isOld",
+            "columnName": "isOld",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "phones.cellPhone",
+            "columnName": "cellPhone",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "phones.homePhone",
+            "columnName": "homePhone",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "phones.workPhone",
+            "columnName": "workPhone",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "user_id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_users_user_name",
+            "unique": true,
+            "columnNames": [
+              "user_name"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_users_user_name` ON `${TABLE_NAME}` (`user_name`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Roles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT, `description` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"944a51a6e8f15788ca6fda4df9790aa6\")"
+    ]
+  }
+}
